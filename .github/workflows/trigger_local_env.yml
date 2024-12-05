@@ -23,5 +23,6 @@ jobs:
       - name: Wait for Local Env tests to pass
         run: |
           curl -s -H "Authorization: token ${{ secrets.DISPATCH_TOKEN }}" \
-          https://api.github.com/repos/Yam1x/to-dos-local-env/actions/runs
+          https://api.github.com/repos/Yam1x/to-dos-local-env/actions/runs \
+          | jq -r '.workflow_runs[] | select(.head_branch == "${{ github.head_ref }}") | .conclusion' | head -n 1
 
