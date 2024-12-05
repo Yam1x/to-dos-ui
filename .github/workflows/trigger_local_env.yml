@@ -34,13 +34,13 @@ jobs:
           
           while true; do
             STATUS=$(curl -s -H "Authorization: token ${{ secrets.DISPATCH_TOKEN }}" \
-              https://api.github.com/repos/Yam1x/to-dos-local-env/actions/runs \
-              | jq '.workflow_runs | map(select(.event == "repository_dispatch" and .display_title == "trigger_from_UI")) | .[0].status')
+              https://api.github.com/repos/Yam1x/to-dos-local-env/actions/runs/$RUN_ID \
+              | jq  .status')
       
             if [ "$STATUS" == "\"completed\"" ]; then
-              CONCLUSION=$(curl -s -H "Authorization: token ${{ secrets.DISPATCH_TOKEN }}" \
-                https://api.github.com/repos/Yam1x/to-dos-local-env/actions/runs \
-                | jq '.workflow_runs | map(select(.event == "repository_dispatch" and .display_title == "trigger_from_UI")) | .[0].conclusion')
+              CONCLUSION=$($(curl -s -H "Authorization: token ${{ secrets.DISPATCH_TOKEN }}" \
+              https://api.github.com/repos/Yam1x/to-dos-local-env/actions/runs/$RUN_ID \
+              | jq  .conclusion')
       
               if [ "$CONCLUSION" == "\"success\"" ]; then
                 echo "Tests passed"
