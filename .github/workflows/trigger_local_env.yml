@@ -22,6 +22,7 @@ jobs:
           
       - name: Wait for Local Env tests to pass
         run: |
+          sleep 20
           curl -s -H "Authorization: token ${{ secrets.DISPATCH_TOKEN }}" \
           https://api.github.com/repos/Yam1x/to-dos-local-env/actions/runs \
           | jq '.workflow_runs'
