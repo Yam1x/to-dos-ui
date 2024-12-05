@@ -27,6 +27,8 @@ jobs:
             https://api.github.com/repos/Yam1x/to-dos-local-env/actions/runs \
             | jq '.workflow_runs[] | select(.head_branch=="${{ github.head_ref }}") | .conclusion' | head -n 1)
 
+            echo "$STATUS"
+
             if [ "$STATUS" == "\"success\"" ]; then
               echo "Tests passed"
               exit 0
