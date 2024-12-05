@@ -18,3 +18,23 @@ jobs:
           -H "Authorization: token $GITHUB_TOKEN" \
           https://api.github.com/repos/Yam1x/to-dos-local-env/dispatches \
           -d '{"event_type": "trigger_from_UI"}' 
+
+          
+      - name: Wait for Local Env tests to pass
+        run: |
+          while true; do
+            STATUS=$(curl -s -H "Authorization: token ${{ secrets.DISPATCH_TOKEN }}" \
+            https://api.github.com/repos/Yam1x/to-dos-local-env/actions/runs \
+            | jq '.workflow_runs[] | select(.head_branch=="${{ github.head_ref }}") | .conclusion' | head -n 1)
+
+            if [ "$STATUS" == "\"success\"" ]; then
+              echo "Tests passed"
+              exit 0
+            elif [ "$STATUS" == "\"failure\"" ]; then
+              echo "Tests failed"
+              exit 1
+            fi
+
+            echo "Waiting for test results..."
+            sleep 30
+          done
