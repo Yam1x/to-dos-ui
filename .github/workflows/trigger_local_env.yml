@@ -23,9 +23,9 @@ jobs:
       - name: Wait for Local Env tests to pass
         run: |
           while true; do
-            curl -s -H "Authorization: token ${{ secrets.DISPATCH_TOKEN }}" \
+            STATUS=$(curl -s -H "Authorization: token ${{ secrets.DISPATCH_TOKEN }}" \
             https://api.github.com/repos/Yam1x/to-dos-local-env/actions/runs \
-            | jq '.workflow_runs[] | {head_branch, conclusion, status, id}'
+            | jq '.workflow_runs | map(select(.head_branch == "master")) | .[-1] | .status')
 
             echo "$STATUS"
 
