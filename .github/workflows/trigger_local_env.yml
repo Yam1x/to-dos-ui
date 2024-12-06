@@ -7,7 +7,7 @@ on:
 
 jobs:
   trigger:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest 
     steps:
       - name: Send dispatch event
         env:
