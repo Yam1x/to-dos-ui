@@ -3,7 +3,6 @@ name: Cypress Tests
 on:
   push:
     branches:
-      - master
       - feature/*
 
 jobs:
