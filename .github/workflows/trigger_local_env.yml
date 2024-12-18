@@ -33,7 +33,7 @@ jobs:
           while true; do
             STATUS=$(curl -s -H "Authorization: token ${{ secrets.DISPATCH_TOKEN }}" \
               "https://api.github.com/repos/Yam1x/to-dos-local-env/actions/runs/$RUN_ID" \
-              | jq -r '.status')
+              | jq -r '.status') 
 
             if [ "$STATUS" == "completed" ]; then
               CONCLUSION=$(curl -s -H "Authorization: token ${{ secrets.DISPATCH_TOKEN }}" \
