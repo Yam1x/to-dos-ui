@@ -21,7 +21,7 @@ jobs:
           -d '{"event_type": "trigger_from_UI", "client_payload": {"branch": "${{ github.head_ref }}"}}'
 
       - name: Wait for Local Env tests to pass
-        run: |
+        run: | 
           sleep 10   
  
           RUN_ID=$(curl -s -H "Authorization: token ${{ secrets.DISPATCH_TOKEN }}" \
