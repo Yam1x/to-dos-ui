@@ -1,0 +1,48 @@
+{
+  "name": "to-dos-ui",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "vite --host",
+    "start-local-env": "vite --host --mode local-env",
+    "build": "tsc && vite build",
+    "lint": "run-s lint-ts lint-eslint",
+    "lint-eslint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint-ts": "tsc --noEmit",
+    "preview": "vite preview",
+    "test": "run-s cypress:run:component",
+    "cypress:open": "cypress open",
+    "cypress:open:component": "cypress open --component --browser chrome",
+    "cypress:run:component": "cypress run --component --browser chrome",
+    "cypress:open:e2e": "cypress open --e2e --browser chrome",
+    "cypress:run:e2e": "cypress run --e2e --browser chrome",
+    "cypress:run:e2e:local-env": "cypress run --e2e --browser chrome --env API_URL=http://to-dos.local.tourmalinecore.internal:40080/api/to-dos-api",
+    "generate-api-types": "docker-compose -f ./api-types/docker-compose.yml up --build ts_generator"
+  },
+  "dependencies": {
+    "axios": "^1.6.7",
+    "mobx": "^6.12.0",
+    "mobx-react-lite": "^4.0.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.3"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.56",
+    "@types/react-dom": "^18.2.19",
+    "@typescript-eslint/eslint-plugin": "^7.0.2",
+    "@typescript-eslint/parser": "^7.0.2",
+    "@vitejs/plugin-react": "^4.2.1",
+    "cypress": "^13.7.1",
+    "eslint": "^8.56.0",
+    "eslint-plugin-cypress": "^2.15.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.2.2",
+    "vite": "^5.1.4"
+  }
+}
