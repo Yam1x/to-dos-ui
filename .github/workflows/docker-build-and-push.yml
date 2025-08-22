@@ -33,17 +33,19 @@ jobs:
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      - name: Log in to Docker Hub
+        
+      - name: Log in to GitHub Container Registry
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
         with:
-          username: ${{ secrets.DOCKER_HUB_READ_AND_WRITE_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_READ_AND_WRITE_TOKEN }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
-          images: pandyz/${{ github.event.repository.name }}
+          images: ghcr.io/yam1x/${{ github.event.repository.name }}
           tags: |
             # minimal (short sha)
             type=sha
